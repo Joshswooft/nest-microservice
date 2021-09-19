@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  users-svc:
+    build:
+      context: "."
+    networks:
+      - "users-svc"
+    ports:
+      - "5000:5000"
+    volumes: 
+      - .:/usr/src/app/:rw
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres
+    networks:
+      - "users-svc"
+    environment: 
+      POSTGRES_USER: root
+      POSTGRES_DB: dev
+      POSTGRES_PASSWORD: password
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready'"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    restart: "on-failure"
+    ports:
+      - 5432:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+  
+  # Example how to support different databases
+  # Note we should follow one database per service when using microservices
+  # mongodb:
+  #   image: mongo:latest
+  #   environment:
+  #     MONGODB_INITDB_DATABASE: "test"
+  #     MONGO_INITDB_ROOT_USERNAME: root
+  #     MONGO_INITDB_ROOT_PASSWORD: example
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     # creates a volume called 'mongo' on your disk and maps the /data/db
+  #     - mongo:/data/db
+
+volumes: 
+  # mongo:
+  db:
+
+networks:
+  users-svc:
