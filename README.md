@@ -47,13 +47,15 @@ $ npm run test:cov
 
 ## TODO:
 
-- Logging: Pino
-- Docker: build from cache
-- Service Discovery
-- Health checking: Terminus
-- Testing
-- CI/CD
-- Infrastructure as Code
-- Semantic Releases
-- Webpack hot reloading
-- Migrations
+- [ ] Logging: Pino
+- [ ] Docker: build from cache
+- [ ] Service Discovery
+- [ ] Health checking: Terminus
+- [ ] Testing
+- [ ] CI/CD
+- [ ] Infrastructure as Code
+- [ ] Semantic Releases
+- [X] Webpack hot reloading
+- [ ] Migrations
+- [ ] Dataloader
+- [ ] Caching
