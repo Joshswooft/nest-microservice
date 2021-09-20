@@ -13,6 +13,9 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment: 
+      # because we are in the docker network
+      - TYPEORM_HOST=db
 
   db:
     image: postgres

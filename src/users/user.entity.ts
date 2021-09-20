@@ -10,4 +10,7 @@ export class User implements IUser {
 
   @Column()
   age: number;
+
+  @Column()
+  gender: string;
 }

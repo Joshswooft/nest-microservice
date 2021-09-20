@@ -12,4 +12,7 @@ export class UserDto implements IUser {
 
   @Field(() => Int)
   age: number;
+
+  @Field()
+  gender: string;
 }

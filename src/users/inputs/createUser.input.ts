@@ -8,4 +8,7 @@ export class CreateUserInput implements Omit<IUser, 'id'> {
 
   @Field(() => Int)
   age: number;
+
+  @Field()
+  gender: string;
 }

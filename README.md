@@ -31,6 +31,9 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+### Running in docker
+
+
 ## Test
 
 ```bash
