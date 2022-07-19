@@ -5,18 +5,17 @@ import {
   Resolver,
   ResolveReference,
 } from '@nestjs/graphql';
-import { DeleteResult, UpdateResult } from 'typeorm';
 import { UserDto } from './dtos/user.dto';
 import { CreateUserInput } from './inputs/createUser.input';
 import { UpdateUserInput } from './inputs/updateUser.input';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
-@Resolver((of) => User)
+@Resolver(() => User)
 export class UserResolver {
   constructor(private usersService: UserService) {}
 
-  @Query((returns) => UserDto)
+  @Query(() => UserDto)
   get(@Args('id') id: number): Promise<UserDto> {
     return this.usersService.findById(id);
   }
