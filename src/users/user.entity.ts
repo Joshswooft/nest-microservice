@@ -4,7 +4,7 @@ import { IUser } from './types/user';
 export class User implements IUser {
   @PrimaryGeneratedColumn()
   readonly id: number;
-  // this entity should error because we don't implement name wtf!
+
   @Column()
   name: string;
 

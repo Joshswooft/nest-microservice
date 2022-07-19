@@ -1,0 +1,31 @@
+name: CI
+on: [push]
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - id: node
+        name: Setting up node v14...
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - id: cache
+        name: Recovering cache...
+        uses: actions/cache@v2
+        with:
+          key: lock-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}
+          path: ${{ github.event.client_payload.data.directory }}/node_modules
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+
+
+      # TODO: check what the above actions do
+      # TODO: run tests - they will fail atm 
+      # TODO: deploy code -> need to decide where /how
