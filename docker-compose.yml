@@ -16,17 +16,16 @@ services:
     environment: 
       # because we are in the docker network
       - TYPEORM_HOST=db
+      - POSTGRES_HOST=db
+    env_file:
+      - .env
 
   db:
     image: postgres
     networks:
       - "users-svc"
-    environment: 
-      POSTGRES_USER: root
-      POSTGRES_DB: dev
-      POSTGRES_PASSWORD: password
     healthcheck:
-      test: ["CMD-SHELL", "sh -c 'pg_isready'"]
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
       interval: 30s
       timeout: 30s
       retries: 3
@@ -35,6 +34,20 @@ services:
       - 5432:5432
     volumes:
       - db:/var/lib/postgresql/data
+    env_file:
+      .env
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+    - "8080:80"
+    volumes:
+    - pgadmin:/data/root/.pgadmin
+    env_file:
+    - .env
+    networks:
+    - "users-svc"
   
   # Example how to support different databases
   # Note we should follow one database per service when using microservices
@@ -53,6 +66,7 @@ services:
 volumes: 
   # mongo:
   db:
+  pgadmin:
 
 networks:
   users-svc:

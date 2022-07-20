@@ -18,4 +18,4 @@ RUN rm -r src
 EXPOSE 5000
 
 # Assign `npm run start:prod` as the default command to run when booting the container
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start:prod"]

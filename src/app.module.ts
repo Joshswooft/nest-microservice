@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 import { GraphQLFederationModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/user.module';
+import { configService } from './config/config.service';
 
 @Module({
   imports: [
     GraphQLFederationModule.forRoot({
       autoSchemaFile: true,
     }),
-    // loads options from ormconfig.json
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
     UserModule,
   ],
 })

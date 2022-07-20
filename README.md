@@ -18,9 +18,16 @@ A template for a micro-service backend system using NEST with mongodb and graphQ
 $ npm install
 ```
 
+```bash
+$ cp .env.example .env
+```
+
 ## Running the app
 
 ```bash
+# build the files before running
+$ npm run build
+
 # development
 $ npm run start
 
@@ -33,6 +40,9 @@ $ npm run start:prod
 
 ### Running in docker
 
+```bash
+$ docker-compose up -d
+```
 
 ## Test
 
