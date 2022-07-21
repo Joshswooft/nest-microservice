@@ -1,4 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { entities } from '../entitites';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
@@ -32,8 +33,8 @@ class ConfigService {
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DB'),
       // Note: webpack is not compatible with static glob files: https://docs.nestjs.com/recipes/hot-reload
-      // so the start:dev script doesn't work
-      entities: ['dist/**/**.entity.js'],
+      // entities: ['dist/**/**.entity.js'],
+      entities,
       migrations: [getMigrationDirectory()],
       synchronize: true,
       cli: {
