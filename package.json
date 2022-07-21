@@ -19,10 +19,10 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky install",
-    "typeorm": "NODE_ENV=migration ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "typeorm:migrate": "typeorm migration:generate --dir migrations",
-    "typeorm:run": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run",
-    "typeorm:revert": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert"
+    "typeorm": "NODE_ENV=migration ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/config/ormconfig.ts",
+    "typeorm:migrate": "NODE_ENV=migration ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate --config src/config/ormconfig.ts --dir src/migrations -n",
+    "typeorm:run": "NODE_ENV=migration ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run  --config src/config/ormconfig.ts",
+    "typeorm:revert": "NODE_ENV=migration ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert --config src/config/ormconfig.ts"
   },
   "dependencies": {
     "@apollo/federation": "^0.26.0",
